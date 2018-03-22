@@ -59,12 +59,17 @@ func NewOauthAuthorizerMiddleware(oauth OauthProvider) func(http.Handler) http.H
 	middleWare := func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			bearer := r.Header.Get("Authorization")
-			token := strings.Split(bearer, " ")[1]
-			if oauth.CheckToken(token) {
-				next.ServeHTTP(w, r)
+			if bearer != "" {
+				token := strings.Split(bearer, " ")[1]
+				if token != "" && oauth.CheckToken(token) {
+					next.ServeHTTP(w, r)
+				} else {
+					http.Error(w, "Not Authorized", 401)
+				}
 			} else {
 				http.Error(w, "Not Authorized", 401)
 			}
+
 		}
 		return http.HandlerFunc(fn)
 	}
