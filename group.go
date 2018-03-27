@@ -1,13 +1,10 @@
 package ddpportal
 
 import (
-	"bitbucket.org/symbol-it/voltiger/utils"
+	"github.com/pkg/errors"
+
 	"github.com/davecgh/go-spew/spew"
 	"github.com/segmentio/ksuid"
-)
-
-const (
-	MemberAlreadyInGroup = utils.Error("Member already in group")
 )
 
 type Group struct {
@@ -27,7 +24,7 @@ func NewGroup(name string, member string) Group {
 func (g *Group) AddMember(member string) error {
 	for _, m := range g.Members {
 		if m == member {
-			return MemberAlreadyInGroup
+			return errors.New("Member already in group")
 		}
 	}
 
