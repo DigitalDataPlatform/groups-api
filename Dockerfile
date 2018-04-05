@@ -1,7 +1,7 @@
 FROM golang:1.10 as builder
 
 WORKDIR /go/src/gitlab.adeo.com/ddp-portal-api
-copy . .
+COPY . .
 
 # Go dep!
 RUN go get -u github.com/golang/dep/...
