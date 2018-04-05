@@ -23,9 +23,9 @@ func InitBadger() (*badger.DB, error) {
 
 func main() {
 	port := ":" + envy.Get("PORT", "3000")
-	oauthURL := envy.Get("OAUTH_SERVER", "https://yradeooauth.corp.leroymerlin.com/oauth-server")
-	oauthClientID := envy.Get("CLIENT_ID", "CORP-DDP-PORTAL-DEV")
-	oauthClientSecret := envy.Get("CLIENT_SECRET", "imtj8d0572dtg7glwb93ss")
+	oauthURL := envy.Get("OAUTH_SERVER", "")
+	oauthClientID := envy.Get("CLIENT_ID", "")
+	oauthClientSecret := envy.Get("CLIENT_SECRET", "")
 
 	adeoOauthProvider := ddpportal.NewOauthAdeoProvider(oauthURL, oauthClientID, oauthClientSecret)
 	oauth := ddpportal.NewOauthAuthorizerMiddleware(adeoOauthProvider)
