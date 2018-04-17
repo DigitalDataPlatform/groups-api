@@ -45,13 +45,13 @@ func main() {
 	r.Use(oauth)
 	r.Use(middleware.Recoverer)
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/portal", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello World !"))
 	})
 
-	r.Route("/config", router.NewConfigRouter)
-	r.Route("/groups", router.NewGroupRouter(groupRepo))
-	r.Route("/me", router.NewMeRouter(groupRepo))
+	r.Route("/portal/config", router.NewConfigRouter)
+	r.Route("/portal/groups", router.NewGroupRouter(groupRepo))
+	r.Route("/portal/me", router.NewMeRouter(groupRepo))
 
 	log.Infof("======== App running in %v mode ========", "stage")
 	http.ListenAndServe(port, r)
