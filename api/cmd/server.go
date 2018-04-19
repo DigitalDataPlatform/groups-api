@@ -23,12 +23,8 @@ func InitBadger() (*badger.DB, error) {
 
 func main() {
 	port := ":" + envy.Get("PORT", "3000")
-	oauthURL := envy.Get("OAUTH_SERVER", "")
-	oauthClientID := envy.Get("CLIENT_ID", "")
-	oauthClientSecret := envy.Get("CLIENT_SECRET", "")
 
-	adeoOauthProvider := ddpportal.NewOauthAdeoProvider(oauthURL, oauthClientID, oauthClientSecret)
-	oauth := ddpportal.NewOauthAuthorizerMiddleware(adeoOauthProvider)
+	authMiddleware := ddpportal.NewJwtAuthMiddleware()
 
 	db, err := InitBadger()
 	if err != nil {
@@ -42,7 +38,7 @@ func main() {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
-	r.Use(oauth)
+	r.Use(authMiddleware)
 	r.Use(middleware.Recoverer)
 
 	r.Get("/portal", func(w http.ResponseWriter, r *http.Request) {

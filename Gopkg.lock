@@ -33,6 +33,12 @@
   version = "v1.3.0"
 
 [[projects]]
+  name = "github.com/dgrijalva/jwt-go"
+  packages = ["."]
+  revision = "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
+  version = "v3.2.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/dgryski/go-farm"
   packages = ["."]
@@ -102,6 +108,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "12667b6e006f11e8c7d8026fd5a50398ae807c85430c27706b5a55e9e40e1168"
+  inputs-digest = "07489de05e2ec6566b3cdc5e734eb4fe0a44f4d844eb43502755bee61e81e614"
   solver-name = "gps-cdcl"
   solver-version = 1
